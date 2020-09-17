@@ -1,3 +1,4 @@
+const bodyParser = require('body-parser');
 const express = require('express')
 const session = require('express-session');
 const passport = require('passport');
@@ -8,9 +9,18 @@ const app = express();
 
 const routes = require('./server/routes')
 
-// setup template engine
+/*==================================================
+    USER MIDDLEWARES
+===================================================*/
 app.set('views', './views');
 app.set('view engine', 'pug');
+
+// serve static files
+app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.urlencoded({extended: false}))
+
+
+
 
 /*==================================================
     SETUP PASSPORT AND SESSION
@@ -26,9 +36,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-
-// serve static files
-app.use(express.static(__dirname + '/public'));
 
 routes(app)
 
