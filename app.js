@@ -2,12 +2,12 @@ const bodyParser = require('body-parser');
 const express = require('express')
 const session = require('express-session');
 const passport = require('passport');
+const routes = require('./server/routes')
+const auth = require('./server/auth');
 
 
 
 const app = express();
-
-const routes = require('./server/routes')
 
 /*==================================================
     USER MIDDLEWARES
@@ -38,5 +38,6 @@ app.use(passport.session());
 
 
 routes(app)
+auth(app)
 
 app.listen(3000, () => console.log("Listening on 3000"))
