@@ -19,6 +19,13 @@ module.exports = function main(app) {
         }))
 
     app
+        .route('/logout')
+        .get((req, res) => {
+            req.logout();
+            res.redirect('/login');
+        })
+
+    app
         .route('/chat')
         .get( checkLoggedIn, (req, res) => {
             res.render('chat')
