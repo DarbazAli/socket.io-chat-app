@@ -16,9 +16,12 @@ app.get('/', (req, res) => {
     res.render('index', {title: 'Home', message: "Hello There"})
 })
 
-app.get('/about', (req, res) => {
-    res.render('about')
-})
+app
+    .route('/login')
+    .get((req, res) => res.render('login'))
 
+
+
+app.use((req, res, next) => res.status(404).render('404'))
 
 app.listen(3000, () => console.log("Listening on 3000"))
